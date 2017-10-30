@@ -34,7 +34,21 @@ class ViewController: UIViewController, UITextFieldDelegate {
     @IBOutlet weak var usdValueLabel: UILabel!
     @IBOutlet weak var usdFlagLabel: UILabel!
     
+    @IBOutlet weak var rusSymbolLabel: UILabel!
+    @IBOutlet weak var rusValueLabel: UILabel!
+    @IBOutlet weak var rusFlagLabel: UILabel!
     
+    @IBOutlet weak var jpnSymbolLabel: UILabel!
+    @IBOutlet weak var jpnValueLabel: UILabel!
+    @IBOutlet weak var jpnFlagLabel: UILabel!
+    
+    @IBOutlet weak var polSymbolLabel: UILabel!
+    @IBOutlet weak var polValueLabel: UILabel!
+    @IBOutlet weak var polFlagLabel: UILabel!
+    
+    @IBOutlet weak var zarSymbolLabel: UILabel!
+    @IBOutlet weak var zarValueLabel: UILabel!
+    @IBOutlet weak var zarFlagLabel: UILabel!
     
     
     override func viewDidLoad() {
@@ -79,6 +93,10 @@ class ViewController: UIViewController, UITextFieldDelegate {
         //self.currencyDict[name] = c
         currencyDict["GBP"] = Currency(name:"GBP", rate:1, flag:"🇬🇧", symbol: "£")
         currencyDict["USD"] = Currency(name:"USD", rate:1, flag:"🇺🇸", symbol: "$")
+        currencyDict["RUB"] = Currency(name:"RUB", rate:1, flag:"🇷🇺", symbol: "₽")
+        currencyDict["JPY"] = Currency(name:"JPY", rate:1, flag:"🇯🇵", symbol: "¥")
+        currencyDict["PLN"] = Currency(name:"PLN", rate:1, flag:"🇵🇱", symbol: "zł")
+        currencyDict["ZAR"] = Currency(name:"ZAR", rate:1, flag:"🇿🇦", symbol: "R")
     }
     
     func displayCurrencyInfo() {
@@ -92,6 +110,26 @@ class ViewController: UIViewController, UITextFieldDelegate {
             usdSymbolLabel.text = c.symbol
             usdValueLabel.text = String(format: "%.02f", c.rate)
             usdFlagLabel.text = c.flag
+        }
+        if let c = currencyDict["RUB"]{
+            rusSymbolLabel.text = c.symbol
+            rusValueLabel.text = String(format: "%.02f", c.rate)
+            rusFlagLabel.text = c.flag
+        }
+        if let c = currencyDict["JPY"]{
+            jpnSymbolLabel.text = c.symbol
+            jpnValueLabel.text = String(format: "%.02f", c.rate)
+            jpnFlagLabel.text = c.flag
+        }
+        if let c = currencyDict["PLN"]{
+            polSymbolLabel.text = c.symbol
+            polValueLabel.text = String(format: "%.02f", c.rate)
+            polFlagLabel.text = c.flag
+        }
+        if let c = currencyDict["ZAR"]{
+            zarSymbolLabel.text = c.symbol
+            zarValueLabel.text = String(format: "%.02f", c.rate)
+            zarFlagLabel.text = c.flag
         }
     }
     
@@ -142,6 +180,30 @@ class ViewController: UIViewController, UITextFieldDelegate {
                                 let c:Currency  = self.currencyDict["GBP"]!
                                 c.rate = rate!
                                 self.currencyDict["GBP"] = c
+                            case "RUB":
+                                //symbol = "£"
+                                //flag = "🇬🇧"
+                                let c:Currency  = self.currencyDict["RUB"]!
+                                c.rate = rate!
+                                self.currencyDict["RUB"] = c
+                            case "JPY":
+                                //symbol = "£"
+                                //flag = "🇬🇧"
+                                let c:Currency  = self.currencyDict["JPY"]!
+                                c.rate = rate!
+                                self.currencyDict["JPY"] = c
+                            case "PLN":
+                                //symbol = "£"
+                                //flag = "🇬🇧"
+                                let c:Currency  = self.currencyDict["PLN"]!
+                                c.rate = rate!
+                                self.currencyDict["PLN"] = c
+                            case "ZAR":
+                                //symbol = "£"
+                                //flag = "🇬🇧"
+                                let c:Currency  = self.currencyDict["ZAR"]!
+                                c.rate = rate!
+                                self.currencyDict["ZAR"] = c
                             default:
                                 print("Ignoring currency: \(String(describing: rate))")
                             }
@@ -169,6 +231,10 @@ class ViewController: UIViewController, UITextFieldDelegate {
     @IBAction func convert(_ sender: Any) {
         var resultGBP = 0.0
         var resultUSD = 0.0
+        var resultRUB = 0.0
+        var resultJPY = 0.0
+        var resultPLN = 0.0
+        var resultZAR = 0.0
         
         if let euro = Double(baseTextField.text!) {
             convertValue = euro
@@ -178,6 +244,18 @@ class ViewController: UIViewController, UITextFieldDelegate {
             if let usd = self.currencyDict["USD"] {
                 resultUSD = convertValue * usd.rate
             }
+            if let rub = self.currencyDict["RUB"] {
+                resultRUB = convertValue * rub.rate
+            }
+            if let jpy = self.currencyDict["JPY"] {
+                resultJPY = convertValue * jpy.rate
+            }
+            if let pln = self.currencyDict["PLN"] {
+                resultPLN = convertValue * pln.rate
+            }
+            if let zar = self.currencyDict["ZAR"] {
+                resultZAR = convertValue * zar.rate
+            }
         }
         //GBP
         
@@ -185,6 +263,10 @@ class ViewController: UIViewController, UITextFieldDelegate {
         
         gbpValueLabel.text = String(format: "%.02f", resultGBP)
         usdValueLabel.text = String(format: "%.02f", resultUSD)
+        rusValueLabel.text = String(format: "%.02f", resultRUB)
+        jpnValueLabel.text = String(format: "%.02f", resultJPY)
+        polValueLabel.text = String(format: "%.02f", resultPLN)
+        zarValueLabel.text = String(format: "%.02f", resultZAR)
     }
     
     /*
