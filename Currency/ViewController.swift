@@ -56,6 +56,12 @@ class ViewController: UIViewController, UITextFieldDelegate {
         // Do any additional setup after loading the view, typically from a nib.
         // print("currencyDict has \(self.currencyDict.count) entries")
         
+        let toolbar = UIToolbar()
+        toolbar.sizeToFit()
+        let doneButton = UIBarButtonItem(barButtonSystemItem: UIBarButtonSystemItem.done, target: self, action: #selector(self.onDone))
+        toolbar.setItems([doneButton], animated: true)
+        baseTextField.inputAccessoryView = toolbar
+        
         // create currency dictionary
         self.createCurrencyDictionary()
         
@@ -234,6 +240,10 @@ class ViewController: UIViewController, UITextFieldDelegate {
     
     @IBAction func refresh() {
         getConversionTable()
+    }
+    
+    @objc func onDone(){
+        view.endEditing(true)
     }
     
 }
