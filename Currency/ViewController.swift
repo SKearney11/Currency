@@ -60,7 +60,7 @@ class ViewController: UIViewController, UITextFieldDelegate {
         self.createCurrencyDictionary()
         
         // get latest currency values
-        getConversionTable()
+        //getConversionTable()
         convertValue = 1
         
         // set up base currency screen items
@@ -142,14 +142,7 @@ class ViewController: UIViewController, UITextFieldDelegate {
         var request = URLRequest(url: URL(string: urlStr)!)
         request.httpMethod = "GET"
         
-        let indicator = UIActivityIndicatorView(activityIndicatorStyle: .gray)
-        indicator.center = view.center
-        view.addSubview(indicator)
-        indicator.startAnimating()
-        
-        NSURLConnection.sendAsynchronousRequest(request, queue: OperationQueue.main) { response, data, error in
-            
-            indicator.stopAnimating()
+        let task = URLSession.shared.dataTask(with: request) {data, response, error in
             
             if error == nil{
                 //print(response!)
@@ -161,57 +154,18 @@ class ViewController: UIViewController, UITextFieldDelegate {
                     if let ratesData = jsonDict["rates"] as? NSDictionary {
                         //print(ratesData)
                         for rate in ratesData{
-                            //print("#####")
+                            
                             let name = String(describing: rate.key)
                             let rate = (rate.value as? NSNumber)?.doubleValue
-                            //var symbol:String
-                            //var flag:String
                             
-                            switch(name){
-                            case "USD":
-                                //symbol = "$"
-                                //flag = "🇺🇸"
-                                let c:Currency  = self.currencyDict["USD"]!
-                                c.rate = rate!
-                                self.currencyDict["USD"] = c
-                            case "GBP":
-                                //symbol = "£"
-                                //flag = "🇬🇧"
-                                let c:Currency  = self.currencyDict["GBP"]!
-                                c.rate = rate!
-                                self.currencyDict["GBP"] = c
-                            case "RUB":
-                                //symbol = "£"
-                                //flag = "🇬🇧"
-                                let c:Currency  = self.currencyDict["RUB"]!
-                                c.rate = rate!
-                                self.currencyDict["RUB"] = c
-                            case "JPY":
-                                //symbol = "£"
-                                //flag = "🇬🇧"
-                                let c:Currency  = self.currencyDict["JPY"]!
-                                c.rate = rate!
-                                self.currencyDict["JPY"] = c
-                            case "PLN":
-                                //symbol = "£"
-                                //flag = "🇬🇧"
-                                let c:Currency  = self.currencyDict["PLN"]!
-                                c.rate = rate!
-                                self.currencyDict["PLN"] = c
-                            case "ZAR":
-                                //symbol = "£"
-                                //flag = "🇬🇧"
-                                let c:Currency  = self.currencyDict["ZAR"]!
-                                c.rate = rate!
-                                self.currencyDict["ZAR"] = c
-                            default:
-                                print("Ignoring currency: \(String(describing: rate))")
+                            for currency in self.currencyDict.keys{
+                                if currency == name {
+                                    let c:Currency  = self.currencyDict[currency]!
+                                    c.rate = rate!
+                                    self.currencyDict[currency] = c
+                                    break
+                                }
                             }
-                            
-                            /*
-                             let c:Currency = Currency(name: name, rate: rate!, flag: flag, symbol: symbol)!
-                             self.currencyDict[name] = c
-                             */
                         }
                         self.lastUpdatedDate = Date()
                     }
@@ -223,9 +177,10 @@ class ViewController: UIViewController, UITextFieldDelegate {
             else{
                 print("Error")
             }
-            
         }
         
+        task.resume()
+
     }
     
     @IBAction func convert(_ sender: Any) {
@@ -277,6 +232,9 @@ class ViewController: UIViewController, UITextFieldDelegate {
      }
      */
     
+    @IBAction func refresh() {
+        getConversionTable()
+    }
     
 }
 
