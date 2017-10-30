@@ -105,6 +105,9 @@
                                     <button opaque="NO" contentMode="scaleToFill" ambiguous="YES" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="Df0-A5-yr7">
                                         <rect key="frame" x="0.0" y="0.0" width="55" height="30"/>
                                         <state key="normal" title="Convert"/>
+                                        <connections>
+                                            <action selector="convert:" destination="BYZ-38-t0r" eventType="touchUpInside" id="LVL-Iw-hlZ"/>
+                                        </connections>
                                     </button>
                                 </subviews>
                             </stackView>
@@ -117,6 +120,18 @@
                         <color key="backgroundColor" red="1" green="1" blue="1" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
                         <viewLayoutGuide key="safeArea" id="6Tk-OE-BBY"/>
                     </view>
+                    <connections>
+                        <outlet property="baseFlag" destination="b3W-ci-iTU" id="nYT-kq-26Q"/>
+                        <outlet property="baseSymbol" destination="YSD-ti-Knz" id="Dxl-yE-2aU"/>
+                        <outlet property="baseTextField" destination="qWU-HA-lfi" id="8bj-9e-d99"/>
+                        <outlet property="gbpFlagLabel" destination="stZ-Tv-mCy" id="kbj-7t-EkW"/>
+                        <outlet property="gbpSymbolLabel" destination="iMA-gM-ejh" id="V5z-aO-u1Y"/>
+                        <outlet property="gbpValueLabel" destination="Cox-tm-tbS" id="0TQ-yP-d6l"/>
+                        <outlet property="lastUpdatedDateLabel" destination="896-eX-wDg" id="fA2-do-NNw"/>
+                        <outlet property="usdFlagLabel" destination="3Th-pN-ik4" id="SXe-zy-WV3"/>
+                        <outlet property="usdSymbolLabel" destination="YW7-Wj-rqE" id="qG6-Ls-WPc"/>
+                        <outlet property="usdValueLabel" destination="rnW-s6-DIE" id="fSi-oR-xqL"/>
+                    </connections>
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="dkx-z0-nzr" sceneMemberID="firstResponder"/>
             </objects>
