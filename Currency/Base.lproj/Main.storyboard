@@ -205,7 +205,7 @@
                                 <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
                                 <state key="normal" title="Refresh"/>
                                 <connections>
-                                    <action selector="refresh" destination="BYZ-38-t0r" eventType="touchUpInside" id="B90-pf-ye0"/>
+                                    <action selector="refresh:" destination="BYZ-38-t0r" eventType="touchUpInside" id="JaI-Nw-MU0"/>
                                 </connections>
                             </button>
                         </subviews>

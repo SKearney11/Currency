@@ -53,9 +53,8 @@ class ViewController: UIViewController, UITextFieldDelegate {
     
     override func viewDidLoad() {
         super.viewDidLoad()
-        // Do any additional setup after loading the view, typically from a nib.
-        // print("currencyDict has \(self.currencyDict.count) entries")
         
+        //Setting the Done button for the keyboard
         let toolbar = UIToolbar()
         toolbar.sizeToFit()
         let doneButton = UIBarButtonItem(barButtonSystemItem: UIBarButtonSystemItem.done, target: self, action: #selector(self.onDone))
@@ -66,7 +65,7 @@ class ViewController: UIViewController, UITextFieldDelegate {
         self.createCurrencyDictionary()
         
         // get latest currency values
-        //getConversionTable()
+        _ = getConversionTable()
         convertValue = 1
         
         // set up base currency screen items
@@ -84,8 +83,6 @@ class ViewController: UIViewController, UITextFieldDelegate {
         
         
         // setup view mover
-        baseTextField.delegate = self
-        
         NotificationCenter.default.addObserver(
             self,
             selector: #selector(keyboardWillShow),
@@ -99,6 +96,8 @@ class ViewController: UIViewController, UITextFieldDelegate {
             name: NSNotification.Name.UIKeyboardWillHide,
             object: nil
         )
+        
+        baseTextField.delegate = self
         
         self.convert(self)
     }
@@ -174,13 +173,16 @@ class ViewController: UIViewController, UITextFieldDelegate {
     }
     
     
-    func getConversionTable() {
+    func getConversionTable() -> Bool{
         //var result = "<NOTHING>"
         
         let urlStr:String = "https://api.fixer.io/latest"
         
         var request = URLRequest(url: URL(string: urlStr)!)
         request.httpMethod = "GET"
+        
+        var done = false
+        let semaphore = DispatchSemaphore(value: 0)
         
         let task = URLSession.shared.dataTask(with: request) {data, response, error in
             
@@ -208,6 +210,7 @@ class ViewController: UIViewController, UITextFieldDelegate {
                             }
                         }
                         self.lastUpdatedDate = Date()
+                        done = true
                     }
                 }
                 catch let error as NSError{
@@ -217,10 +220,12 @@ class ViewController: UIViewController, UITextFieldDelegate {
             else{
                 print("Error")
             }
+            semaphore.signal()
         }
         
         task.resume()
-
+        _ = semaphore.wait(timeout: DispatchTime.distantFuture)
+        return done
     }
     
     @IBAction func convert(_ sender: Any) {
@@ -272,8 +277,19 @@ class ViewController: UIViewController, UITextFieldDelegate {
      }
      */
     
-    @IBAction func refresh() {
-        getConversionTable()
+    @IBAction func refresh(_ sender: Any) {
+        while true{
+            if getConversionTable() {
+                break
+            }
+        }
+        
+        let dateformatter = DateFormatter()
+        dateformatter.dateFormat = "dd/MM/yyyy hh:mm a"
+        self.lastUpdatedDateLabel.text = dateformatter.string(from: lastUpdatedDate)
+        
+        baseTextField.text = String(format: "%.02f", baseCurrency.rate)
+        convert((Any).self)
     }
     
     @objc func onDone(){
