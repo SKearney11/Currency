@@ -5,6 +5,7 @@
     </device>
     <dependencies>
         <plugIn identifier="com.apple.InterfaceBuilder.IBCocoaTouchPlugin" version="13174"/>
+        <capability name="Constraints to layout margins" minToolsVersion="6.0"/>
         <capability name="Safe area layout guides" minToolsVersion="9.0"/>
         <capability name="documents saved in the Xcode 8 format" minToolsVersion="8.0"/>
     </dependencies>
@@ -208,16 +209,23 @@
                                     <action selector="refresh:" destination="BYZ-38-t0r" eventType="touchUpInside" id="JaI-Nw-MU0"/>
                                 </connections>
                             </button>
+                            <progressView opaque="NO" contentMode="scaleToFill" verticalHuggingPriority="750" progress="0.5" translatesAutoresizingMaskIntoConstraints="NO" id="3lH-6h-ewH">
+                                <rect key="frame" x="95" y="90.333333333333329" width="224" height="2"/>
+                            </progressView>
                         </subviews>
                         <color key="backgroundColor" red="1" green="1" blue="1" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
                         <constraints>
+                            <constraint firstItem="3lH-6h-ewH" firstAttribute="centerX" secondItem="6Tk-OE-BBY" secondAttribute="centerX" id="1Tq-Gp-oi4"/>
                             <constraint firstItem="daL-rU-uag" firstAttribute="top" secondItem="sNl-gR-EV2" secondAttribute="bottom" constant="10" id="3Ls-1X-zuP"/>
                             <constraint firstItem="sNl-gR-EV2" firstAttribute="top" secondItem="ofz-bQ-OOF" secondAttribute="bottom" constant="113.66666666666667" id="6ie-Bn-FMg"/>
+                            <constraint firstItem="3lH-6h-ewH" firstAttribute="top" secondItem="ofz-bQ-OOF" secondAttribute="bottom" constant="20" id="8yF-rh-KL5"/>
                             <constraint firstItem="6Tk-OE-BBY" firstAttribute="bottom" secondItem="GgA-Eo-4eU" secondAttribute="bottom" constant="20" id="Cwa-xi-Ezm"/>
                             <constraint firstItem="daL-rU-uag" firstAttribute="top" secondItem="sNl-gR-EV2" secondAttribute="bottom" constant="10" id="FGZ-AN-67X"/>
                             <constraint firstItem="ofz-bQ-OOF" firstAttribute="top" secondItem="6Tk-OE-BBY" secondAttribute="top" constant="30" id="HCj-Mn-whb"/>
+                            <constraint firstItem="3lH-6h-ewH" firstAttribute="leading" secondItem="8bC-Xf-vdC" secondAttribute="leadingMargin" constant="75" id="KdH-XB-WMb"/>
                             <constraint firstItem="sNl-gR-EV2" firstAttribute="centerX" secondItem="6Tk-OE-BBY" secondAttribute="centerX" id="LQZ-fJ-YVc"/>
                             <constraint firstItem="daL-rU-uag" firstAttribute="centerX" secondItem="6Tk-OE-BBY" secondAttribute="centerX" id="hOv-Pw-mZb"/>
+                            <constraint firstAttribute="trailingMargin" secondItem="3lH-6h-ewH" secondAttribute="trailing" constant="75" id="r5K-7n-MuF"/>
                             <constraint firstItem="6Tk-OE-BBY" firstAttribute="bottom" secondItem="daL-rU-uag" secondAttribute="bottom" constant="125" id="tDZ-1N-nSB"/>
                             <constraint firstItem="GgA-Eo-4eU" firstAttribute="centerX" secondItem="6Tk-OE-BBY" secondAttribute="centerX" id="udv-Yb-vdf"/>
                             <constraint firstItem="ofz-bQ-OOF" firstAttribute="centerX" secondItem="6Tk-OE-BBY" secondAttribute="centerX" id="wpC-BR-1U4"/>
@@ -238,6 +246,7 @@
                         <outlet property="polFlagLabel" destination="H5i-Rf-LJ6" id="7l2-rk-06Y"/>
                         <outlet property="polSymbolLabel" destination="8SP-00-ZcA" id="TgQ-zb-hL1"/>
                         <outlet property="polValueLabel" destination="17g-Q0-wdF" id="16W-74-3J1"/>
+                        <outlet property="progressBar" destination="3lH-6h-ewH" id="ED7-Ti-Vwf"/>
                         <outlet property="rusFlagLabel" destination="af6-3h-37F" id="Hws-Vd-sR9"/>
                         <outlet property="rusSymbolLabel" destination="Wma-Eg-Zz1" id="1K5-yU-QnL"/>
                         <outlet property="rusValueLabel" destination="C6a-cR-7eA" id="fzi-sg-auf"/>

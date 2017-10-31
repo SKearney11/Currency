@@ -10,6 +10,9 @@ import UIKit
 
 class ViewController: UIViewController, UITextFieldDelegate {
     
+    let defaultSession = URLSession(configuration: .default)
+    var dataTask: URLSessionDataTask?
+    
     //MARK Model holders
     var currencyDict:Dictionary = [String:Currency]()
     var currencyArray = [Currency]()
@@ -20,6 +23,8 @@ class ViewController: UIViewController, UITextFieldDelegate {
     
     //MARK Outlets
     //@IBOutlet weak var convertedLabel: UILabel!
+    @IBOutlet weak var progressBar: UIProgressView!
+    var progress: Float = 0.0
     
     @IBOutlet weak var baseSymbol: UILabel!
     @IBOutlet weak var baseTextField: UITextField!
@@ -65,6 +70,7 @@ class ViewController: UIViewController, UITextFieldDelegate {
         self.createCurrencyDictionary()
         
         // get latest currency values
+        progress = 0.0
         _ = getConversionTable()
         convertValue = 1
         
@@ -184,7 +190,9 @@ class ViewController: UIViewController, UITextFieldDelegate {
         var done = false
         let semaphore = DispatchSemaphore(value: 0)
         
-        let task = URLSession.shared.dataTask(with: request) {data, response, error in
+        dataTask?.cancel()
+        
+        dataTask = defaultSession.dataTask(with: request) {data, response, error in
             
             if error == nil{
                 //print(response!)
@@ -194,7 +202,7 @@ class ViewController: UIViewController, UITextFieldDelegate {
                     //print(jsonDict)
                     
                     if let ratesData = jsonDict["rates"] as? NSDictionary {
-                        //print(ratesData)
+                        
                         for rate in ratesData{
                             
                             let name = String(describing: rate.key)
@@ -202,6 +210,11 @@ class ViewController: UIViewController, UITextFieldDelegate {
                             
                             for currency in self.currencyDict.keys{
                                 if currency == name {
+                                    DispatchQueue.main.async {
+                                        self.progress = self.progress + 0.1666
+                                        print(self.progress)
+                                        self.progressBar.setProgress(self.progress, animated: true)
+                                    }
                                     let c:Currency  = self.currencyDict[currency]!
                                     c.rate = rate!
                                     self.currencyDict[currency] = c
@@ -210,7 +223,11 @@ class ViewController: UIViewController, UITextFieldDelegate {
                             }
                         }
                         self.lastUpdatedDate = Date()
-                        done = true
+                        DispatchQueue.main.async {
+                            let dateformatter = DateFormatter()
+                            dateformatter.dateFormat = "dd/MM/yyyy hh:mm a"
+                            self.lastUpdatedDateLabel.text = dateformatter.string(from: self.lastUpdatedDate)
+                        }
                     }
                 }
                 catch let error as NSError{
@@ -220,11 +237,13 @@ class ViewController: UIViewController, UITextFieldDelegate {
             else{
                 print("Error")
             }
+            done = true
             semaphore.signal()
         }
         
-        task.resume()
+        dataTask?.resume()
         _ = semaphore.wait(timeout: DispatchTime.distantFuture)
+        
         return done
     }
     
@@ -278,15 +297,10 @@ class ViewController: UIViewController, UITextFieldDelegate {
      */
     
     @IBAction func refresh(_ sender: Any) {
-        while true{
-            if getConversionTable() {
-                break
-            }
-        }
+        self.progress = 0.0
+        _ = getConversionTable()
         
-        let dateformatter = DateFormatter()
-        dateformatter.dateFormat = "dd/MM/yyyy hh:mm a"
-        self.lastUpdatedDateLabel.text = dateformatter.string(from: lastUpdatedDate)
+        
         
         baseTextField.text = String(format: "%.02f", baseCurrency.rate)
         convert((Any).self)
