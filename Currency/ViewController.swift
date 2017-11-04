@@ -210,7 +210,7 @@ class ViewController: UIViewController, UITextFieldDelegate {
                             for currency in self.currencyDict.keys{
                                 if currency == name {
                                     DispatchQueue.main.async {
-                                        self.progress += 0.1666
+                                        self.progress += (Float)(1)/(Float)(self.currencyDict.count)
                                         self.progressBar.setProgress(self.progress, animated: true)
                                     }
                                     let c:Currency  = self.currencyDict[currency]!
