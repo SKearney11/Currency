@@ -70,7 +70,7 @@ class ViewController: UIViewController, UITextFieldDelegate {
         self.createCurrencyDictionary()
         
         // get latest currency values
-        progress = 0.0
+        progressBar.isHidden = true
         _ = getConversionTable()
         convertValue = 1
         
@@ -179,16 +179,15 @@ class ViewController: UIViewController, UITextFieldDelegate {
     }
     
     
-    func getConversionTable() -> Bool{
+    func getConversionTable(){
         //var result = "<NOTHING>"
         
         let urlStr:String = "https://api.fixer.io/latest"
-        
+        progress = 0.0
+        progressBar.setProgress(progress, animated: false)
+        progressBar.isHidden = false
         var request = URLRequest(url: URL(string: urlStr)!)
         request.httpMethod = "GET"
-        
-        var done = false
-        let semaphore = DispatchSemaphore(value: 0)
         
         dataTask?.cancel()
         
@@ -211,8 +210,7 @@ class ViewController: UIViewController, UITextFieldDelegate {
                             for currency in self.currencyDict.keys{
                                 if currency == name {
                                     DispatchQueue.main.async {
-                                        self.progress = self.progress + 0.1666
-                                        print(self.progress)
+                                        self.progress += 0.1666
                                         self.progressBar.setProgress(self.progress, animated: true)
                                     }
                                     let c:Currency  = self.currencyDict[currency]!
@@ -237,14 +235,9 @@ class ViewController: UIViewController, UITextFieldDelegate {
             else{
                 print("Error")
             }
-            done = true
-            semaphore.signal()
         }
         
         dataTask?.resume()
-        _ = semaphore.wait(timeout: DispatchTime.distantFuture)
-        
-        return done
     }
     
     @IBAction func convert(_ sender: Any) {
@@ -297,10 +290,7 @@ class ViewController: UIViewController, UITextFieldDelegate {
      */
     
     @IBAction func refresh(_ sender: Any) {
-        self.progress = 0.0
         _ = getConversionTable()
-        
-        
         
         baseTextField.text = String(format: "%.02f", baseCurrency.rate)
         convert((Any).self)
