@@ -70,8 +70,8 @@ class ViewController: UIViewController, UITextFieldDelegate {
         self.createCurrencyDictionary()
         
         // get latest currency values
-        progressBar.isHidden = true
-        _ = getConversionTable()
+        //_ = getConversionTable()
+        refresh((Any).self)
         convertValue = 1
         
         // set up base currency screen items
@@ -185,7 +185,6 @@ class ViewController: UIViewController, UITextFieldDelegate {
         let urlStr:String = "https://api.fixer.io/latest"
         progress = 0.0
         progressBar.setProgress(progress, animated: false)
-        progressBar.isHidden = false
         var request = URLRequest(url: URL(string: urlStr)!)
         request.httpMethod = "GET"
         
@@ -225,6 +224,7 @@ class ViewController: UIViewController, UITextFieldDelegate {
                             let dateformatter = DateFormatter()
                             dateformatter.dateFormat = "dd/MM/yyyy hh:mm a"
                             self.lastUpdatedDateLabel.text = dateformatter.string(from: self.lastUpdatedDate)
+                            self.progressBar.setProgress(1.0, animated: true)
                         }
                     }
                 }
@@ -235,6 +235,7 @@ class ViewController: UIViewController, UITextFieldDelegate {
             else{
                 print("Error")
             }
+        
         }
         
         dataTask?.resume()
@@ -298,6 +299,7 @@ class ViewController: UIViewController, UITextFieldDelegate {
     
     @objc func onDone(){
         view.endEditing(true)
+        convert((Any).self)
     }
     
 }
