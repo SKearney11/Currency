@@ -70,8 +70,8 @@ class ViewController: UIViewController, UITextFieldDelegate {
         self.createCurrencyDictionary()
         
         // get latest currency values
-        //_ = getConversionTable()
-        refresh((Any).self)
+        _ = getConversionTable()
+        
         convertValue = 1
         
         // set up base currency screen items
@@ -104,8 +104,8 @@ class ViewController: UIViewController, UITextFieldDelegate {
         )
         
         baseTextField.delegate = self
-        
-        self.convert(self)
+
+        //self.convert(self)
     }
     
     @objc func keyboardWillShow(notification: NSNotification) {
@@ -225,6 +225,8 @@ class ViewController: UIViewController, UITextFieldDelegate {
                             dateformatter.dateFormat = "dd/MM/yyyy hh:mm a"
                             self.lastUpdatedDateLabel.text = dateformatter.string(from: self.lastUpdatedDate)
                             self.progressBar.setProgress(1.0, animated: true)
+                            self.baseTextField.text = String(format: "%.02f", self.baseCurrency.rate)
+                            self.convert((Any).self)
                         }
                     }
                 }
@@ -282,19 +284,9 @@ class ViewController: UIViewController, UITextFieldDelegate {
         zarValueLabel.text = String(format: "%.02f", resultZAR)
     }
     
-    /*
-     override func prepare(for segue: UIStoryboardSegue, sender: Any?) {
-     // Get the new view controller using segue.destinationViewController.
-     // Pass the selected object to the new view controller.
-     
-     }
-     */
     
     @IBAction func refresh(_ sender: Any) {
         _ = getConversionTable()
-        
-        baseTextField.text = String(format: "%.02f", baseCurrency.rate)
-        convert((Any).self)
     }
     
     @objc func onDone(){
