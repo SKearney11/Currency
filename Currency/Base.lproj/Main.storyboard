@@ -46,18 +46,13 @@
                                             <constraint firstAttribute="width" constant="224" id="SlI-Vk-SOt"/>
                                         </constraints>
                                     </progressView>
-                                    <switch opaque="NO" contentMode="scaleToFill" horizontalHuggingPriority="750" verticalHuggingPriority="750" contentHorizontalAlignment="center" contentVerticalAlignment="center" on="YES" translatesAutoresizingMaskIntoConstraints="NO" id="BlW-Ws-s5I">
-                                        <rect key="frame" x="10" y="25" width="51" height="31"/>
-                                    </switch>
                                 </subviews>
                                 <color key="backgroundColor" red="0.8666666666666667" green="0.8666666666666667" blue="0.8666666666666667" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
                                 <constraints>
-                                    <constraint firstItem="BlW-Ws-s5I" firstAttribute="top" secondItem="R9Q-j7-w2Z" secondAttribute="top" constant="25" id="8ac-dj-a0t"/>
                                     <constraint firstItem="3lH-6h-ewH" firstAttribute="top" secondItem="ofz-bQ-OOF" secondAttribute="bottom" constant="15" id="JSb-eT-W0d"/>
                                     <constraint firstItem="3lH-6h-ewH" firstAttribute="centerX" secondItem="R9Q-j7-w2Z" secondAttribute="centerX" id="X2S-HM-fOg"/>
                                     <constraint firstItem="ofz-bQ-OOF" firstAttribute="centerX" secondItem="R9Q-j7-w2Z" secondAttribute="centerX" id="gTC-6H-LI1"/>
                                     <constraint firstItem="ofz-bQ-OOF" firstAttribute="top" secondItem="R9Q-j7-w2Z" secondAttribute="top" constant="40" id="rQ1-z0-TxT"/>
-                                    <constraint firstItem="BlW-Ws-s5I" firstAttribute="leading" secondItem="R9Q-j7-w2Z" secondAttribute="leading" constant="10" id="yYH-8B-c01"/>
                                 </constraints>
                             </view>
                             <textField opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" text="1.0" borderStyle="roundedRect" textAlignment="center" clearsOnBeginEditing="YES" adjustsFontForContentSizeCategory="YES" minimumFontSize="17" translatesAutoresizingMaskIntoConstraints="NO" id="qWU-HA-lfi">
@@ -81,6 +76,17 @@
                                 <state key="normal" title="➤"/>
                                 <connections>
                                     <action selector="convert:" destination="BYZ-38-t0r" eventType="touchUpInside" id="LVL-Iw-hlZ"/>
+                                </connections>
+                            </button>
+                            <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" adjustsImageSizeForAccessibilityContentSizeCategory="YES" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="Chd-YC-XQl">
+                                <rect key="frame" x="345" y="659" width="49" height="57"/>
+                                <fontDescription key="fontDescription" type="system" pointSize="50"/>
+                                <state key="normal" title="⟳">
+                                    <color key="titleColor" red="0.0" green="0.47843137250000001" blue="1" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
+                                    <color key="titleShadowColor" red="0.0" green="0.47843137250000001" blue="1" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
+                                </state>
+                                <connections>
+                                    <action selector="refresh:" destination="BYZ-38-t0r" eventType="touchUpInside" id="JaI-Nw-MU0"/>
                                 </connections>
                             </button>
                             <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="€" textAlignment="right" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontForContentSizeCategory="YES" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="YSD-ti-Knz">
@@ -239,17 +245,12 @@
                                     <constraint firstItem="sNl-gR-EV2" firstAttribute="height" secondItem="St0-Mt-enB" secondAttribute="height" multiplier="0.8" id="fCh-Dx-sfa"/>
                                 </constraints>
                             </view>
-                            <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" adjustsImageSizeForAccessibilityContentSizeCategory="YES" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="Chd-YC-XQl">
-                                <rect key="frame" x="345" y="659" width="49" height="57"/>
-                                <fontDescription key="fontDescription" type="system" pointSize="50"/>
-                                <state key="normal" title="⟳">
-                                    <color key="titleColor" red="0.0" green="0.47843137250000001" blue="1" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
-                                    <color key="titleShadowColor" red="0.0" green="0.47843137250000001" blue="1" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
-                                </state>
+                            <switch opaque="NO" contentMode="scaleToFill" horizontalHuggingPriority="750" verticalHuggingPriority="750" contentHorizontalAlignment="center" contentVerticalAlignment="center" on="YES" translatesAutoresizingMaskIntoConstraints="NO" id="BlW-Ws-s5I">
+                                <rect key="frame" x="25" y="680" width="51" height="31"/>
                                 <connections>
-                                    <action selector="refresh:" destination="BYZ-38-t0r" eventType="touchUpInside" id="JaI-Nw-MU0"/>
+                                    <action selector="switchLight:" destination="BYZ-38-t0r" eventType="valueChanged" id="VUp-th-C1K"/>
                                 </connections>
-                            </button>
+                            </switch>
                         </subviews>
                         <color key="backgroundColor" red="0.8666666666666667" green="0.8666666666666667" blue="0.8666666666666667" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
                         <gestureRecognizers/>
@@ -260,12 +261,14 @@
                             <constraint firstItem="b3W-ci-iTU" firstAttribute="leading" secondItem="qWU-HA-lfi" secondAttribute="trailing" constant="30" id="KdT-36-mO6"/>
                             <constraint firstAttribute="bottom" secondItem="Chd-YC-XQl" secondAttribute="bottom" constant="20" symbolic="YES" id="Ldd-uG-cog"/>
                             <constraint firstItem="qWU-HA-lfi" firstAttribute="leading" secondItem="YSD-ti-Knz" secondAttribute="trailing" constant="30" id="Rj4-w8-guU"/>
+                            <constraint firstItem="BlW-Ws-s5I" firstAttribute="leading" secondItem="6Tk-OE-BBY" secondAttribute="leading" constant="25" id="TUn-jK-SG4"/>
                             <constraint firstItem="6Tk-OE-BBY" firstAttribute="bottom" secondItem="qWU-HA-lfi" secondAttribute="bottom" constant="80" id="Vof-B1-aTa"/>
                             <constraint firstItem="6Tk-OE-BBY" firstAttribute="bottom" secondItem="YSD-ti-Knz" secondAttribute="bottom" constant="80" id="YoK-s2-igG"/>
                             <constraint firstItem="qWU-HA-lfi" firstAttribute="centerX" secondItem="6Tk-OE-BBY" secondAttribute="centerX" id="dUf-N4-9g3"/>
                             <constraint firstItem="St0-Mt-enB" firstAttribute="leading" secondItem="6Tk-OE-BBY" secondAttribute="leading" id="dlf-dy-AZJ"/>
                             <constraint firstItem="Chd-YC-XQl" firstAttribute="top" secondItem="b3W-ci-iTU" secondAttribute="bottom" constant="3" id="igh-u5-pSi"/>
                             <constraint firstItem="St0-Mt-enB" firstAttribute="trailing" secondItem="6Tk-OE-BBY" secondAttribute="trailing" id="j0n-yT-zxB"/>
+                            <constraint firstItem="6Tk-OE-BBY" firstAttribute="bottom" secondItem="BlW-Ws-s5I" secondAttribute="bottom" constant="25" id="jNF-D1-mEC"/>
                             <constraint firstAttribute="bottom" secondItem="Df0-A5-yr7" secondAttribute="bottom" constant="5" id="k0x-FM-ryQ"/>
                             <constraint firstItem="St0-Mt-enB" firstAttribute="top" secondItem="R9Q-j7-w2Z" secondAttribute="bottom" id="uJT-UW-zZe"/>
                             <constraint firstItem="6Tk-OE-BBY" firstAttribute="bottom" secondItem="b3W-ci-iTU" secondAttribute="bottom" constant="80" id="uQc-WW-kUC"/>
@@ -280,6 +283,8 @@
                         <outlet property="baseFlag" destination="b3W-ci-iTU" id="nYT-kq-26Q"/>
                         <outlet property="baseSymbol" destination="YSD-ti-Knz" id="Dxl-yE-2aU"/>
                         <outlet property="baseTextField" destination="qWU-HA-lfi" id="8bj-9e-d99"/>
+                        <outlet property="currencyView" destination="St0-Mt-enB" id="P37-ka-70L"/>
+                        <outlet property="dateView" destination="R9Q-j7-w2Z" id="AfP-qH-zJH"/>
                         <outlet property="gbpFlagLabel" destination="stZ-Tv-mCy" id="kbj-7t-EkW"/>
                         <outlet property="gbpSymbolLabel" destination="iMA-gM-ejh" id="V5z-aO-u1Y"/>
                         <outlet property="gbpValueLabel" destination="Cox-tm-tbS" id="0TQ-yP-d6l"/>
@@ -287,6 +292,8 @@
                         <outlet property="jpnSymbolLabel" destination="2ae-OE-5QQ" id="Zph-Sg-tlu"/>
                         <outlet property="jpnValueLabel" destination="87b-i9-wwE" id="LNQ-Px-e3W"/>
                         <outlet property="lastUpdatedDateLabel" destination="896-eX-wDg" id="fA2-do-NNw"/>
+                        <outlet property="lastUpdatedLabel" destination="IiB-QZ-CHS" id="HC1-i5-2aU"/>
+                        <outlet property="lightSwitch" destination="BlW-Ws-s5I" id="KVz-Ll-rnP"/>
                         <outlet property="polFlagLabel" destination="H5i-Rf-LJ6" id="7l2-rk-06Y"/>
                         <outlet property="polSymbolLabel" destination="8SP-00-ZcA" id="TgQ-zb-hL1"/>
                         <outlet property="polValueLabel" destination="17g-Q0-wdF" id="16W-74-3J1"/>

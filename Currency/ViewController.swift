@@ -26,9 +26,12 @@ class ViewController: UIViewController, UITextFieldDelegate {
     @IBOutlet weak var progressBar: UIProgressView!
     var progress: Float = 0.0
     
+    @IBOutlet weak var lightSwitch: UISwitch!
+    
     @IBOutlet weak var baseSymbol: UILabel!
     @IBOutlet weak var baseTextField: UITextField!
     @IBOutlet weak var baseFlag: UILabel!
+    @IBOutlet weak var lastUpdatedLabel: UILabel!
     @IBOutlet weak var lastUpdatedDateLabel: UILabel!
     
     @IBOutlet weak var gbpSymbolLabel: UILabel!
@@ -58,6 +61,8 @@ class ViewController: UIViewController, UITextFieldDelegate {
     
     override func viewDidLoad() {
         super.viewDidLoad()
+        
+        lightSwitch.isOn = false
         
         //Setting the Done button for the keyboard
         let toolbar = UIToolbar()
@@ -294,5 +299,53 @@ class ViewController: UIViewController, UITextFieldDelegate {
         convert((Any).self)
     }
     
+    
+    //Bonus feature
+    @IBOutlet weak var dateView: UIView!
+    @IBOutlet weak var currencyView: UIView!
+    
+    @IBAction func switchLight(_ sender: Any) {
+        if lightSwitch.isOn {
+            self.view.backgroundColor = UIColor.black
+            dateView.backgroundColor = UIColor.black
+            currencyView.backgroundColor = UIColor.black
+            
+            lastUpdatedLabel.textColor = UIColor.white
+            lastUpdatedDateLabel.textColor = UIColor.white
+            baseSymbol.textColor = UIColor.white
+            gbpSymbolLabel.textColor = UIColor.white
+            gbpValueLabel.textColor = UIColor.white
+            usdSymbolLabel.textColor = UIColor.white
+            usdValueLabel.textColor = UIColor.white
+            rusSymbolLabel.textColor = UIColor.white
+            rusValueLabel.textColor = UIColor.white
+            jpnSymbolLabel.textColor = UIColor.white
+            jpnValueLabel.textColor = UIColor.white
+            polSymbolLabel.textColor = UIColor.white
+            polValueLabel.textColor = UIColor.white
+            zarSymbolLabel.textColor = UIColor.white
+            zarValueLabel.textColor = UIColor.white
+            return
+        }
+        self.view.backgroundColor = UIColor(red: 221/255, green: 221/255, blue: 221/255, alpha: 1)
+        dateView.backgroundColor = UIColor(red: 221/255, green: 221/255, blue: 221/255, alpha: 1)
+        currencyView.backgroundColor = UIColor(red: 238/255, green: 238/255, blue: 238/255, alpha: 1)
+        
+        lastUpdatedLabel.textColor = UIColor.black
+        lastUpdatedDateLabel.textColor = UIColor.black
+        baseSymbol.textColor = UIColor.black
+        gbpSymbolLabel.textColor = UIColor.black
+        gbpValueLabel.textColor = UIColor.black
+        usdSymbolLabel.textColor = UIColor.black
+        usdValueLabel.textColor = UIColor.black
+        rusSymbolLabel.textColor = UIColor.black
+        rusValueLabel.textColor = UIColor.black
+        jpnSymbolLabel.textColor = UIColor.black
+        jpnValueLabel.textColor = UIColor.black
+        polSymbolLabel.textColor = UIColor.black
+        polValueLabel.textColor = UIColor.black
+        zarSymbolLabel.textColor = UIColor.black
+        zarValueLabel.textColor = UIColor.black
+    }
 }
 
