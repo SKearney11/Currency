@@ -65,6 +65,7 @@ class ViewController: UIViewController, UITextFieldDelegate {
         lightSwitch.isOn = false
         
         //Setting the Done button for the keyboard
+        //inspired from a random Youtube video
         let toolbar = UIToolbar()
         toolbar.sizeToFit()
         let doneButton = UIBarButtonItem(barButtonSystemItem: UIBarButtonSystemItem.done, target: self, action: #selector(self.onDone))
@@ -94,6 +95,7 @@ class ViewController: UIViewController, UITextFieldDelegate {
         
         
         // setup view mover
+        // inspired from a combination of stackoverflow suggestions
         NotificationCenter.default.addObserver(
             self,
             selector: #selector(keyboardWillShow),
@@ -183,7 +185,7 @@ class ViewController: UIViewController, UITextFieldDelegate {
         }
     }
     
-    
+    //This method went through a few iterations with numerous combinations of sources, mainly from stack overflow
     func getConversionTable(){
         //var result = "<NOTHING>"
         
