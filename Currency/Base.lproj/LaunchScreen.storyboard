@@ -17,9 +17,8 @@
                         <rect key="frame" x="0.0" y="0.0" width="375" height="667"/>
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
                         <subviews>
-                            <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" fixedFrame="YES" text="iConvert" textAlignment="center" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="svf-Nx-3iK">
-                                <rect key="frame" x="114" y="433" width="147" height="56"/>
-                                <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
+                            <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="iConvert" textAlignment="center" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="svf-Nx-3iK">
+                                <rect key="frame" x="132" y="325.5" width="111" height="36"/>
                                 <fontDescription key="fontDescription" type="italicSystem" pointSize="30"/>
                                 <nil key="textColor"/>
                                 <nil key="highlightedColor"/>
@@ -35,7 +34,9 @@
                         <color key="backgroundColor" red="0.70003966159999997" green="0.86719230430000005" blue="1" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
                         <constraints>
                             <constraint firstItem="HMV-f5-MLg" firstAttribute="top" secondItem="6Tk-OE-BBY" secondAttribute="top" constant="135" id="1YT-nr-4pi"/>
+                            <constraint firstItem="svf-Nx-3iK" firstAttribute="centerY" secondItem="6Tk-OE-BBY" secondAttribute="centerY" id="Cbh-dC-TFi"/>
                             <constraint firstItem="HMV-f5-MLg" firstAttribute="centerX" secondItem="6Tk-OE-BBY" secondAttribute="centerX" id="YYU-IR-96l"/>
+                            <constraint firstItem="svf-Nx-3iK" firstAttribute="centerX" secondItem="6Tk-OE-BBY" secondAttribute="centerX" id="klS-gn-hzN"/>
                         </constraints>
                         <viewLayoutGuide key="safeArea" id="6Tk-OE-BBY"/>
                     </view>

@@ -54,7 +54,6 @@ class ViewController: UIViewController, UITextFieldDelegate {
     
     override func viewDidLoad() {
         super.viewDidLoad()
-        
         //add done button to keyboard
         let keyboardToolbar = UIToolbar()
         keyboardToolbar.sizeToFit()
@@ -205,17 +204,19 @@ class ViewController: UIViewController, UITextFieldDelegate {
                             default:
                                 print("Ignoring currency: \(String(describing: rate))")
                             }
+                        }
+                        
+                        self.lastUpdatedDate = Date()
+                        DispatchQueue.main.async {
                             
-                            self.lastUpdatedDate = Date()
-                            DispatchQueue.main.async {
-                                
-                                self.indicator.stopAnimating()
-                                
-                                let dateformatter = DateFormatter()
-                                dateformatter.dateFormat = "dd/MM/yyyy hh:mm a"
-                                self.lastUpdatedDateLabel.text = dateformatter.string(from: self.lastUpdatedDate)
-                                
-                            }
+                            self.indicator.stopAnimating()
+                            
+                            let dateformatter = DateFormatter()
+                            dateformatter.dateFormat = "dd/MM/yyyy hh:mm a"
+                            self.lastUpdatedDateLabel.text = dateformatter.string(from: self.lastUpdatedDate)
+                            
+                            self.baseTextField.text = String(format: "%.02f", self.baseCurrency.rate)
+                            self.convert((Any).self);
                         }
                         
                     }
@@ -272,8 +273,7 @@ class ViewController: UIViewController, UITextFieldDelegate {
     }
     
     @IBAction func refresh(_ sender: Any) {
-        getConversionTable()
-        
+        getConversionTable();
     }
     
     @objc func finishEditing(){
